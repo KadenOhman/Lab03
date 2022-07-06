@@ -47,7 +47,7 @@ public class AgeCalculatorServlet extends HttpServlet {
         return;
     }           
 
-    public boolean isValid(String number) {
+    private boolean isValid(String number) {
         try{
             Integer.parseInt(number);
             return true;

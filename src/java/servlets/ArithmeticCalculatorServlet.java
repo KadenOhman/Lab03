@@ -28,11 +28,13 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
             request.setAttribute("output", String.format("Invalid"));
         }
         
+        
+        
         getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);
         return;
     }
     
-    public boolean isValid(String number) {
+    private boolean isValid(String number) {
         try{
             Integer.parseInt(number);
             return true;
