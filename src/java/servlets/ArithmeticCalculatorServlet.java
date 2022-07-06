@@ -23,9 +23,18 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
             throws ServletException, IOException {
         String firstInput = request.getParameter("first");
         String secInput = request.getParameter("second");
+        String mathFunc = request.getParameter("math");
         
-        if (firstInput != null || secInput != null || isValid(firstInput) != true || isValid(secInput) != true){
+        if (firstInput == null || secInput == null || isValid(firstInput) != true || isValid(secInput) != true){
             request.setAttribute("output", String.format("Invalid"));
+        } else if ("+".equals(mathFunc)){
+            request.setAttribute("output", Integer.parseInt(firstInput) + Integer.parseInt(secInput));
+        } else if ("-".equals(mathFunc)){
+            request.setAttribute("output", Integer.parseInt(firstInput) - Integer.parseInt(secInput));
+        } else if ("*".equals(mathFunc)){
+            request.setAttribute("output", Integer.parseInt(firstInput) * Integer.parseInt(secInput));
+        } else if ("%".equals(mathFunc)){
+            request.setAttribute("output", Integer.parseInt(firstInput) & Integer.parseInt(secInput));
         }
         
         
