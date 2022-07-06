@@ -1,6 +1,5 @@
 package servlets;
 
-
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,23 +20,41 @@ public class AgeCalculatorServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String userage = request.getParameter("user_age");
+        String userinput = request.getParameter("user_age");
+        boolean validNumber = false;
         
-        if (userage.isEmpty()){
-            request.setAttribute("output", "You mus give your current age");
-        } eles if (Integer.parseInt(userage) != true){
+        if (userinput.isEmpty()){
+
+            request.setAttribute("output", "You must give your current age");
+        } else if (!isValid(userinput)){
+
             request.setAttribute("output", "You must enter a number");
-        } else if (Integer.parseInt(userage) = true){
-            request.setAttribute("output", String.format("Your age nesxt birthday will be %d", Integer.parseInt(userage + 1)));
+        } else if (Integer.parseInt(userinput) < 0 ){
+            request.setAttribute("output", "You must give a valid age");
+        }else {
+            validNumber = true;
         }
         
-        System.out.println(userage + 1);
+            
+        if (validNumber == true){
+            int userAge = Integer.parseInt(userinput);
+            request.setAttribute("output", String.format("Your age next birthday will be %d", userAge+1));
+        }
+
         
-        request.setAttribute("output", userage);
         
-        
-        getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/AgeCalculator.jsp").forward(request, response);
         return;
+    }           
+
+    public boolean isValid(String number) {
+        try{
+            Integer.parseInt(number);
+            return true;
+        }catch (NumberFormatException exception){
+            return false;
+            }
     }
 
+ 
 }
