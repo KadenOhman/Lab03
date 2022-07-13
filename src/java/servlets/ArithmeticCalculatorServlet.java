@@ -37,7 +37,8 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
             request.setAttribute("output", Integer.parseInt(firstInput) & Integer.parseInt(secInput));
         }
         
-        
+        request.setAttribute("first", firstInput);
+        request.setAttribute("second", secInput);
         
         getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request, response);
         return;
